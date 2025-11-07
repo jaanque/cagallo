@@ -9,4 +9,19 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('cagallo');
+
+  showAd() {
+    const adContainer = document.getElementById('adContainer');
+    if (adContainer) {
+      adContainer.innerHTML = '';
+      const script1 = document.createElement('script');
+      script1.type = 'text/javascript';
+      script1.innerHTML = `atOptions = { 'key' : '9d2243d125f9ac015a8573a063b57c87', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };`;
+      const script2 = document.createElement('script');
+      script2.type = 'text/javascript';
+      script2.src = '//www.highperformanceformat.com/9d2243d125f9ac015a8573a063b57c87/invoke.js';
+      adContainer.appendChild(script1);
+      adContainer.appendChild(script2);
+    }
+  }
 }
