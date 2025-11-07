@@ -18,4 +18,13 @@ export class SupabaseService {
       console.error('Error incrementing clicks:', error);
     }
   }
+
+  async getClicks(): Promise<number> {
+    const { data, error } = await this.supabase.rpc('get_clicks');
+    if (error) {
+      console.error('Error getting clicks:', error);
+      return 0;
+    }
+    return data;
+  }
 }

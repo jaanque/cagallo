@@ -1,19 +1,29 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 
 @Component({
   selector: 'app-root',
   imports: [],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
-export class App {
+export class App implements OnInit {
   protected readonly title = signal('cagallo');
+  public clickCount = signal(0);
 
   constructor(private supabaseService: SupabaseService) {}
 
-  showAd() {
-    this.supabaseService.incrementClicks();
+  ngOnInit() {
+    this.supabaseService.getClicks().then((count) => {
+      this.clickCount.set(count);
+    });
+  }
+
+  async showAd() {
+    await this.supabaseService.incrementClicks();
+    const count = await this.supabaseService.getClicks();
+    this.clickCount.set(count);
+
     const adContainer = document.getElementById('adContainer');
     if (!adContainer) return;
 

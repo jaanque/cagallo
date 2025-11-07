@@ -15,3 +15,14 @@ BEGIN
   UPDATE clicks SET count = count + 1 WHERE id = 1;
 END;
 $$ LANGUAGE plpgsql;
+
+-- Create a function to get the current click count
+CREATE OR REPLACE FUNCTION get_clicks()
+RETURNS integer AS $$
+DECLARE
+  click_count integer;
+BEGIN
+  SELECT count INTO click_count FROM clicks WHERE id = 1;
+  RETURN click_count;
+END;
+$$ LANGUAGE plpgsql;
