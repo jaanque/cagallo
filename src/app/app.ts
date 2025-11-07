@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { SupabaseService } from './supabase.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,10 @@ import { Component, signal } from '@angular/core';
 export class App {
   protected readonly title = signal('cagallo');
 
+  constructor(private supabaseService: SupabaseService) {}
+
   showAd() {
+    this.supabaseService.incrementClicks();
     const adContainer = document.getElementById('adContainer');
     if (!adContainer) return;
 
