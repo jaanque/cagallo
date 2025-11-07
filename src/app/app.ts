@@ -20,9 +20,8 @@ export class App implements OnInit {
   }
 
   async showAd() {
-    await this.supabaseService.incrementClicks();
-    const count = await this.supabaseService.getClicks();
-    this.clickCount.set(count);
+    const newCount = await this.supabaseService.incrementClicks();
+    this.clickCount.set(newCount);
 
     const adContainer = document.getElementById('adContainer');
     if (!adContainer) return;

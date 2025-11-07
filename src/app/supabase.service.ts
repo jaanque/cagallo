@@ -12,11 +12,13 @@ export class SupabaseService {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
   }
 
-  async incrementClicks() {
-    const { error } = await this.supabase.rpc('increment_clicks');
+  async incrementClicks(): Promise<number> {
+    const { data, error } = await this.supabase.rpc('increment_clicks');
     if (error) {
       console.error('Error incrementing clicks:', error);
+      return 0;
     }
+    return data;
   }
 
   async getClicks(): Promise<number> {

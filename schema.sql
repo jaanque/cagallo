@@ -10,9 +10,12 @@ INSERT INTO clicks (id, count) VALUES (1, 0);
 
 -- Create a function to increment the click count
 CREATE OR REPLACE FUNCTION increment_clicks()
-RETURNS void AS $$
+RETURNS integer AS $$
+DECLARE
+  new_count integer;
 BEGIN
-  UPDATE clicks SET count = count + 1 WHERE id = 1;
+  UPDATE clicks SET count = count + 1 WHERE id = 1 RETURNING count INTO new_count;
+  RETURN new_count;
 END;
 $$ LANGUAGE plpgsql;
 
