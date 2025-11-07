@@ -1,9 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -20,7 +19,7 @@ export class App {
       () => {
         const script = document.createElement('script');
         script.async = true;
-        script.dataset.cfasync = 'false';
+        script.dataset['cfasync'] = 'false';
         script.src = '//pl28007602.effectivegatecpm.com/6580bdf8007e8e5fc35951d3a4cbafed/invoke.js';
         const div = document.createElement('div');
         div.id = 'container-6580bdf8007e8e5fc35951d3a4cbafed';
